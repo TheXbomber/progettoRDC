@@ -1,0 +1,27 @@
+PLANNER VIAGGI
+
+INPUT
+- Luogo
+- Data
+- Durata
+- Mezzo
+
+OUTPUT
+- Tappe
+- Date
+- Costi
+- Meteo
+- Mezzi
+
+API
+- Calendar (Inserire)
+- Informazioni luoghi
+- OAuth
+
+
+
+- Client
+- Nginx
+- Server (gestione richieste)
+- DB
+- Logger
