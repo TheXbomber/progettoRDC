@@ -16,7 +16,7 @@ services:
     # command: "npm start"
     container_name: app
     ports:
-      - "8000:8000"
+      - "8081:8080"
 
   nginx:
     image: nginx
