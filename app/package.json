@@ -1,0 +1,23 @@
+{
+  "name": "progetto_rdc",
+  "version": "0.0.1",
+  "description": "Progetto per il corso di Reti di Calcolatori",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheXbomber/progettoRDC.git"
+  },
+  "author": "Alessandro Rocchi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheXbomber/progettoRDC/issues"
+  },
+  "homepage": "https://github.com/TheXbomber/progettoRDC#readme",
+  "dependencies": {
+    "ronin-mocks": "^0.1.11",
+    "ronin-server": "^0.1.3"
+  }
+}

@@ -1,7 +1,28 @@
-version: '3'
 services:
-	nginx:
-		build: ./nginx
-		container_name: 'nginx'
-		ports:
-			-'8080:80'
+
+  app:
+    image: node:16
+    build:
+      context: ./app
+      dockerfile: ./Dockerfile
+    # user: node
+    # working_dir: /app
+    # environment:
+    #   - NODE_ENV=production
+    # volumes:
+    #   - ./:/app
+    # expose:
+    #   - "8081"
+    # command: "npm start"
+    container_name: app
+    ports:
+      - "8000:8000"
+
+  nginx:
+    image: nginx
+    build:
+      context: ./nginx
+      dockerfile: ./Dockerfile
+    container_name: "nginx"
+    ports:
+      - "8080:80"
