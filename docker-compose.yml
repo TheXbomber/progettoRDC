@@ -1,23 +1,5 @@
 services:
 
-  app:
-    image: node:16
-    build:
-      context: ./app
-      dockerfile: ./Dockerfile
-    # user: node
-    # working_dir: /app
-    # environment:
-    #   - NODE_ENV=production
-    # volumes:
-    #   - ./:/app
-    # expose:
-    #   - "8081"
-    # command: "npm start"
-    container_name: app
-    ports:
-      - "8081:8080"
-
   nginx:
     image: nginx
     build:
@@ -26,3 +8,57 @@ services:
     container_name: "nginx"
     ports:
       - "8080:80"
+
+  app_serv:
+    image: node:16
+    build:
+      context: ./app_serv
+      dockerfile: ./Dockerfile
+    container_name: "app_serv"
+    ports:
+      - "8081:8080"
+
+  couchdb:
+    image: couchdb
+    build:
+      context: ./couchdb
+      dockerfile: ./Dockerfile
+    container_name: "couchdb"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+    volumes:
+      - ./data:/opt/couchdb/data
+    ports:
+      - "8082:5984"
+  
+  app_client:
+    image: node:16
+    #build:
+      #context: ./app_client
+      #dockerfile: ./Dockerfile
+    container_name: "app_client"
+    ports:
+      - "8083:8080"
+
+  rabbitmq:
+    image: rabbitmq
+    build:
+      context: ./rabbitmq
+      dockerfile: ./Dockerfile
+    container_name: "rabbitmq"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - "8084:15672"
+
+  logger:
+    image: node:16
+    #build:
+      #context: ./logger
+      #dockerfile: ./Dockerfile
+    container_name: "logger"
+    ports:
+      - "8085:8080"
+    
