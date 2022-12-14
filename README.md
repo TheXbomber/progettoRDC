@@ -1,3 +1,7 @@
 # progettoRDC
 Stato progetto:
-- Creati container per nginx e server node (da configurare correttamente)
+- Container creati (Nginx, App server, RabbitMQ, CouchDB, Logger)
+- App server creato
+- App client creato
+- Nginx reverse proxy impostato verso app server
+- DB creato
