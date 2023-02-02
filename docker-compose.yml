@@ -7,13 +7,15 @@ services:
       dockerfile: ./Dockerfile
     container_name: "nginx"
     links:
-      - app_serv1:appserv1
-      - app_serv2:appserv2
-      - app_serv3:appserv3
+      - app_serv1:app_serv1
+      - app_serv2:app_serv2
+      - app_serv3:app_serv3
     depends_on:
       - app_serv1
       - app_serv2
       - app_serv3
+    networks:
+      - app_network
     ports:
       - "8080:80"
 

@@ -8,13 +8,13 @@
 
 const http = require('http');
 
-const hostname = '127.0.0.1';
+const hostname = '0.0.0.0';
 const port = 8080;
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('This is the app server');
+  res.end(`This is the app server (${process.env.INSTANCE})`);
 });
 
 server.listen(port, hostname, () => {
