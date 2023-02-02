@@ -6,17 +6,55 @@ services:
       context: ./nginx
       dockerfile: ./Dockerfile
     container_name: "nginx"
+    links:
+      - app_serv1:appserv1
+      - app_serv2:appserv2
+      - app_serv3:appserv3
+    depends_on:
+      - app_serv1
+      - app_serv2
+      - app_serv3
     ports:
       - "8080:80"
 
-  app_serv:
+  app_serv1:
     image: node:16
     build:
       context: ./app_serv
       dockerfile: ./Dockerfile
-    container_name: "app_serv"
+    container_name: "app_serv1"
+    networks:
+      - app_network
     ports:
-      - "8081:8080"
+      - "8080"
+    environment:
+      - INSTANCE=serv1
+  
+  app_serv2:
+    image: node:16
+    build:
+      context: ./app_serv
+      dockerfile: ./Dockerfile
+    container_name: "app_serv2"
+    networks:
+      - app_network
+    ports:
+      - "8080"
+    environment:
+      - INSTANCE=serv2
+
+  app_serv3:
+    image: node:16
+    build:
+      context: ./app_serv
+      dockerfile: ./Dockerfile
+    container_name: "app_serv3"
+    networks:
+      - app_network
+    ports:
+      - "8080"
+    environment:
+      - INSTANCE=serv3
 
   couchdb:
     image: couchdb
@@ -53,4 +91,7 @@ services:
     container_name: "logger"
     # ports:
     #   - "8085:8080"
-    
+  
+networks:
+  app_network:
+    driver: bridge
