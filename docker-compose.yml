@@ -14,6 +14,8 @@ services:
       - app_serv1
       - app_serv2
       - app_serv3
+    volumes:
+      - ./nginx:/nginx
     networks:
       - app_network
     ports:
@@ -25,6 +27,8 @@ services:
       context: ./app_serv
       dockerfile: ./Dockerfile
     container_name: "app_serv1"
+    volumes:
+      - ./app_serv:/app_serv
     networks:
       - app_network
     ports:
@@ -38,6 +42,8 @@ services:
       context: ./app_serv
       dockerfile: ./Dockerfile
     container_name: "app_serv2"
+    volumes:
+      - ./app_serv:/app_serv
     networks:
       - app_network
     ports:
@@ -51,6 +57,8 @@ services:
       context: ./app_serv
       dockerfile: ./Dockerfile
     container_name: "app_serv3"
+    volumes:
+      - ./app_serv:/app_serv
     networks:
       - app_network
     ports:
@@ -69,8 +77,10 @@ services:
       - COUCHDB_PASSWORD=password
     volumes:
       - ./data:/opt/couchdb/data
+      - ./couchdb:/couchdb
     ports:
       - "8082:5984"
+    #http://localhost:8082/_utils/#/_all_dbs
 
   rabbitmq:
     image: rabbitmq
@@ -78,6 +88,8 @@ services:
       context: ./rabbitmq
       dockerfile: ./Dockerfile
     container_name: "rabbitmq"
+    volumes:
+      - ./rabbitmq:/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=password
@@ -87,10 +99,12 @@ services:
 
   logger:
     image: node:16
-    #build:
-      #context: ./logger
-      #dockerfile: ./Dockerfile
+    build:
+      context: ./logger
+      dockerfile: ./Dockerfile
     container_name: "logger"
+    volumes:
+      - ./logger:/logger
     # ports:
     #   - "8085:8080"
   

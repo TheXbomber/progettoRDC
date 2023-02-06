@@ -1,22 +1,35 @@
-// const ronin = require('ronin-server')
-// const mocks = require('ronin-mocks')
+// const http = require('http');
 
-// const server = ronin.server()
+// const hostname = '0.0.0.0';
+// const port = 8080;
 
-// server.use('/', mocks.server(server.Router(), false, true))
-// server.start()
+// const server = http.createServer((req, res) => {
+//   res.statusCode = 200;
+//   res.setHeader('Content-Type', 'text/plain');
+//   res.end(`This is the app server (${process.env.INSTANCE})`);
+// });
 
-const http = require('http');
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`);
+// });
 
-const hostname = '0.0.0.0';
+const express = require('express');
+const cors = require('cors');
+const app = express();
 const port = 8080;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end(`This is the app server (${process.env.INSTANCE})`);
+app.use(cors());
+
+app.get('/', (req, res) => {
+  console.log('Received request for /');
+  res.send(`This is the app server (${process.env.INSTANCE})`);
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.get('/test', (req, res) => {
+  console.log('Received request for /test');
+  res.send('This is a test');
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://127.0.0.1:${port}/`)
 });
