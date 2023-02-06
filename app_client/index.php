@@ -10,5 +10,6 @@
     <body>
         This is the app client<br>
         <button onclick='foo()'>TEST</button>
+        <div id='test_result'></div>
     </body>
 </html>

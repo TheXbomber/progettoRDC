@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 app.get('/test', (req, res) => {
   console.log('Received request for /test');
-  res.send('This is a test');
+  res.send(`This is a test (${process.env.INSTANCE})`);
 });
 
 app.listen(port, () => {
